@@ -37,6 +37,7 @@ const App = () => {
 
             <h1>SUPER CHANGES</h1>
             <h1>SUPER CHANGES 2222</h1>
+            <h1>AUTH CHANGES</h1>
         </Box>
     );
 };
