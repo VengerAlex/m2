@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.btn {
+    background-color: red;
+}
+
+.ss {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    background-image: url("assets/images.jpg");
+}
