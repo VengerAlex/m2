@@ -7,6 +7,9 @@ const App = () => {
     return (
         <Box sx={{width: "100%", height: "1000px", padding: "20px", backgroundColor: "#101945"}}>
             <Typography>Hello World</Typography>
+            <Typography>Hello World2</Typography>
+            <Typography>Hello World3</Typography>
+            <Typography>Hello World4</Typography>
         </Box>
     );
 };
