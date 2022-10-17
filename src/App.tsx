@@ -8,6 +8,8 @@ const App = () => {
         <Box sx={{width: "100%", height: "1000px", padding: "20px", backgroundColor: "#101945"}}>
             <Typography>Hello World</Typography>
             <Typography>Hello World@@</Typography>
+            <Typography>Hello</Typography>
+            <Typography>Hello</Typography>
         </Box>
     );
 };
