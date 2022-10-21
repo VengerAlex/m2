@@ -6,6 +6,7 @@ const App = () => {
     return (
         <Box>
             <Typography>Hello World</Typography>
+            <Typography>Hello World</Typography>
         </Box>
     );
 };
