@@ -1,43 +1,75 @@
-import React from 'react';
-import {Box, Button, ButtonProps, makeStyles, TextField, Typography} from "@mui/material";
+import React, {RefObject, useState, useEffect} from 'react';
 import "./index.css"
-import {AuthPageWrapper} from "./components/AuthPageWrapper";
+import Box from '@mui/material/Box';
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import {styled} from "@mui/material/styles";
+import {Button, Icon, Typography} from "@mui/material";
 
+type Event = MouseEvent | TouchEvent;
 
-type DivProps = {
-    bgColor: string;
+export const useOnClickOutside = <T extends HTMLElement = HTMLElement>(
+    ref: RefObject<T>,
+    handler: (event: Event) => void,
+) => {
+    useEffect(() => {
+        const listener = (event: Event) => {
+            const el = ref?.current;
+            if (!el || el.contains((event?.target as Node) || null)) {
+                return;
+            }
+
+            console.log("CLICK")
+            handler(event);
+        };
+
+        document.addEventListener('mousedown', listener);
+        document.addEventListener('touchstart', listener);
+
+        return () => {
+            document.removeEventListener('mousedown', listener);
+            document.removeEventListener('touchstart', listener);
+        };
+    }, [ref, handler]);
 };
 
-const MyButton = styled(Button)<DivProps>(({ theme, bgColor }) => ({
-    color: "#fff",
-    backgroundColor: bgColor,
-    "&:hover": {
-        backgroundColor: "red",
-    },
+
+export const ActionIcon = styled(Icon)(() => ({
+    cursor: "pointer",
+    position: "absolute",
+    right: "14px",
+    top: "7px",
+    fontSize: "20px",
 }));
 
-const App = () => {
-    return (
-        <Box sx={{width: "100%", height: "1000px", padding: "20px", backgroundColor: "#1D283A"}}>
-            <Typography variant="h1">Sign In</Typography>
-            <Typography variant="h2">Hello World</Typography>
-            <TextField id="standard-basic" label="Standard" variant="standard" />
-            <MyButton
-                disabled={true}
-                onClick={() => console.log("+")}
-                sx={{padding: "10px 141px"}}
-                bgColor="#539713">
-                hello
-            </MyButton>
-            <MyButton sx={{padding: "4px 48px"}} bgColor="#1D283A">hello</MyButton>
-            <div className="ss">
-                hello world
-            </div>
 
-            <h1>SUPER CHANGES</h1>
-            <h1>SUPER CHANGES 2222</h1>
+const App = () => {
+    const clickRef = React.useRef<HTMLDivElement | null>(null);
+    const headerRef = React.useRef<HTMLInputElement | null>(null);
+    const [isShownActions, setIsShownActions] = useState(false)
+    useOnClickOutside(clickRef, () => setIsShownActions(false));
+
+    const editBtn = () => {
+        console.log("EDIT")
+        headerRef.current?.focus();
+    }
+
+    return (
+        <>
+        <Box sx={{width: "100%", height: "110px", padding: "20px", backgroundColor: "#ccc"}}>
+            <Box sx={{backgroundColor: "#fff", position: "relative"}} ref={clickRef}>
+                <ActionIcon onClick={() => setIsShownActions(true)}>
+                    <MoreHorizIcon />
+                </ActionIcon>
+                {isShownActions && <Box sx={{display: "flex", flexDirection: "column", width: "130px", position: "absolute", right: 0, top: "30px", backgroundColor: "red"}}>
+                    <Button variant="contained" onClick={editBtn}>Edit</Button>
+                    <Button variant="contained" onClick={() => console.log("DELETE")}>Delete</Button>
+                </Box>}
+            </Box>
         </Box>
+            <Box sx={{width: "200px"}}>
+                <Typography ref={headerRef} contentEditable={true} sx={{color: "black"}}>Hello World</Typography>
+            </Box>
+        </>
     );
 };
 
