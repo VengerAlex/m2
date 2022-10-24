@@ -15,3 +15,12 @@
     background-color: red;
     background-image: url("assets/images.jpg");
 }
+.input-color {
+    visibility: hidden;
+}
+
+.color {
+    width: 80px;
+    height: 23px;
+    background-color: red;
+}
