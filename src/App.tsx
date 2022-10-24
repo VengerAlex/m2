@@ -8,6 +8,7 @@ const App = () => {
             <Typography>Hello World</Typography>
             <Typography>Hello World</Typography>
             <Typography>Ukraine</Typography>
+            <Typography>USA</Typography>
         </Box>
     );
 };
