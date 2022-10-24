@@ -7,6 +7,7 @@ const App = () => {
         <Box>
             <Typography>Hello World</Typography>
             <Typography>Hello World</Typography>
+            <Typography>Ukraine</Typography>
         </Box>
     );
 };
